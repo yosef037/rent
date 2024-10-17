@@ -364,7 +364,7 @@ const AdminDash = () => {
               <li>
                 <a href="components-alerts.html">
                   <i className="bi bi-circle"></i>
-                  <span>Alerts</span>
+                  <span>Available vehicles</span>
                 </a>
               </li>
               <li>
