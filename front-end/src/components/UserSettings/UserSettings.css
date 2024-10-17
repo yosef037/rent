@@ -1,0 +1,16 @@
+.user-settings {
+  padding: 20px;
+}
+
+.profile-info {
+  margin-bottom: 20px;
+}
+
+.password-form input {
+  display: block;
+  margin: 10px 0;
+}
+
+.logout-btn {
+  margin-top: 20px;
+}

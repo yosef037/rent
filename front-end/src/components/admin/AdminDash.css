@@ -600,6 +600,19 @@ h6 {
 .sidebar {
   width: 250px; /* Default width */
   transition: width 0.3s; /* Smooth transition */
+  position: fixed;
+  top: 60px;
+  left: 0;
+  bottom: 0;
+  width: 300px;
+  z-index: 996;
+  transition: all 0.3s;
+  padding: 20px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #aab7cf transparent;
+  box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
+  background-color: #fff;
 }
 
 .sidebar.collapsed {
@@ -706,10 +719,13 @@ h6 {
   border-radius: 4px;
 }
 
-.sidebar-nav .nav-link i {
+.sidebar-nav .nav-link Link {
   font-size: 16px;
   margin-right: 10px;
   color: #4154f1;
+}
+.sidebar-nav .nav-link span {
+  padding-left: ;
 }
 
 .sidebar-nav .nav-link.collapsed {
@@ -717,7 +733,7 @@ h6 {
   background: #fff;
 }
 
-.sidebar-nav .nav-link.collapsed i {
+.sidebar-nav .nav-link.collapsed Link {
   color: #899bbd;
 }
 
@@ -726,7 +742,7 @@ h6 {
   background: #f6f9ff;
 }
 
-.sidebar-nav .nav-link:hover i {
+.sidebar-nav .nav-link:hover Link {
   color: #4154f1;
 }
 
@@ -745,7 +761,7 @@ h6 {
   list-style: none;
 }
 
-.sidebar-nav .nav-content a {
+.sidebar-nav .nav-content {
   display: flex;
   align-items: center;
   font-size: 14px;

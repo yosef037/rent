@@ -7,6 +7,11 @@ import { IoIosSearch } from "react-icons/io";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { IoCarSportSharp } from "react-icons/io5";
+import { IoCalendarNumberSharp } from "react-icons/io5";
+import { FaRegUserCircle } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
+import { SiHomeassistantcommunitystore } from "react-icons/si";
 
 const AdminDash = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true); // State for sidebar
@@ -21,13 +26,12 @@ const AdminDash = () => {
         className="header fixed-top d-flex align-items-center"
       >
         <div className="d-flex align-items-center justify-content-between">
-          
-          <Link to={"/admin"} className="logo d-flex align-items-center">
+          <Link to={"/"} className="logo d-flex align-items-center">
             <img src={logo} alt="" />
             {/* <img src="assets/img/logo.png" alt=""> */}
 
             {/* <span className="d-none d-lg-block">Admin Dashboard</span> */}
-            <span >Admin Dashboard</span>
+            <span>Admin Dashboard</span>
           </Link>
           {/* <i className="bi bi-list toggle-sidebar-btn"></i> */}
           <FaBarsStaggered
@@ -334,154 +338,44 @@ const AdminDash = () => {
         className={`sidebar ${isSidebarOpen ? "" : "collapsed"}`}
       >
         {" "}
-        {/* Conditional class */}
+        {/* Conditional className */}
         {/* <aside id="sidebar" className="sidebar"> */}
         <ul className="sidebar-nav" id="sidebar-nav">
           <li className="nav-item">
-            <a className="nav-link " href="index.html">
-              <i className="bi bi-grid"></i>
+            <Link className="nav-link " href="index.html">
+              <SiHomeassistantcommunitystore />
               <span>Dashboard</span>
-            </a>
+            </Link>
           </li>
-          {/* <!-- End Dashboard Nav --> */}
 
           <li className="nav-item">
-            <a
-              className="nav-link collapsed"
-              data-bs-target="#components-nav"
-              data-bs-toggle="collapse"
-              href="#"
-            >
-              <i className="bi bi-menu-button-wide"></i>
-              <span>Components</span>
-              <i className="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul
-              id="components-nav"
-              className="nav-content collapse "
-              data-bs-parent="#sidebar-nav"
-            >
-              <li>
-                <a href="components-alerts.html">
-                  <i className="bi bi-circle"></i>
-                  <span>Available vehicles</span>
-                </a>
-              </li>
-              <li>
-                <a href="components-accordion.html">
-                  <i className="bi bi-circle"></i>
-                  <span>Accordion</span>
-                </a>
-              </li>
-              <li>
-                <a href="components-badges.html">
-                  <i className="bi bi-circle"></i>
-                  <span>Badges</span>
-                </a>
-              </li>
-              <li>
-                <a href="components-breadcrumbs.html">
-                  <i className="bi bi-circle"></i>
-                  <span>Breadcrumbs</span>
-                </a>
-              </li>
-              <li>
-                <a href="components-buttons.html">
-                  <i className="bi bi-circle"></i>
-                  <span>Buttons</span>
-                </a>
-              </li>
-              <li>
-                <a href="components-cards.html">
-                  <i className="bi bi-circle"></i>
-                  <span>Cards</span>
-                </a>
-              </li>
-              <li>
-                <a href="components-carousel.html">
-                  <i className="bi bi-circle"></i>
-                  <span>Carousel</span>
-                </a>
-              </li>
-              <li>
-                <a href="components-list-group.html">
-                  <i className="bi bi-circle"></i>
-                  <span>List group</span>
-                </a>
-              </li>
-              <li>
-                <a href="components-modal.html">
-                  <i className="bi bi-circle"></i>
-                  <span>Modal</span>
-                </a>
-              </li>
-              <li>
-                <a href="components-tabs.html">
-                  <i className="bi bi-circle"></i>
-                  <span>Tabs</span>
-                </a>
-              </li>
-              <li>
-                <a href="components-pagination.html">
-                  <i className="bi bi-circle"></i>
-                  <span>Pagination</span>
-                </a>
-              </li>
-              <li>
-                <a href="components-progress.html">
-                  <i className="bi bi-circle"></i>
-                  <span>Progress</span>
-                </a>
-              </li>
-              <li>
-                <a href="components-spinners.html">
-                  <i className="bi bi-circle"></i>
-                  <span>Spinners</span>
-                </a>
-              </li>
-              <li>
-                <a href="components-tooltips.html">
-                  <i className="bi bi-circle"></i>
-                  <span>Tooltips</span>
-                </a>
-              </li>
-            </ul>
-          </li>
-          {/* <!-- End Components Nav --> */}
+            <Link to="/admin/manage-vehicles" className="nav-link collapsed">
+              <IoCarSportSharp />
 
-          <li className="nav-heading">Pages</li>
+              <span>Manage Vehicles</span>
+            </Link>
+          </li>
 
           <li className="nav-item">
-            <a className="nav-link collapsed" href="users-profile.html">
-              <i className="bi bi-person"></i>
-              <span>Profile</span>
-            </a>
+            <Link to="/admin/manage-bookings" className="nav-link collapsed">
+              <IoCalendarNumberSharp />
+              <span>Manage Bookings</span>
+            </Link>
           </li>
-          {/* <!-- End Profile Page Nav --> */}
 
           <li className="nav-item">
-            <a className="nav-link collapsed" href="pages-faq.html">
-              <i className="bi bi-question-circle"></i>
-              <span>F.A.Q</span>
-            </a>
+            <Link className="nav-link collapsed" href="pages-contact.html">
+              <FaRegUserCircle />
+              <span>Manage Users</span>
+            </Link>
           </li>
-          {/* <!-- End F.A.Q Page Nav --> */}
 
           <li className="nav-item">
-            <a className="nav-link collapsed" href="pages-contact.html">
-              <i className="bi bi-envelope"></i>
-              <span>Contact</span>
-            </a>
+            <Link className="nav-link collapsed" href="pages-register.html">
+              <FaLocationDot />
+              <span>Locations</span>
+            </Link>
           </li>
-          {/* <!-- End Contact Page Nav --> */}
-
-          <li className="nav-item">
-            <a className="nav-link collapsed" href="pages-register.html">
-              <i className="bi bi-card-list"></i>
-              <span>Register</span>
-            </a>
-          </li>
-          {/* <!-- End Register Page Nav --> */}
 
           <li className="nav-item">
             <a className="nav-link collapsed" href="pages-login.html">
@@ -489,27 +383,158 @@ const AdminDash = () => {
               <span>Login</span>
             </a>
           </li>
-          {/* <!-- End Login Page Nav --> */}
-
-          <li className="nav-item">
-            <a className="nav-link collapsed" href="pages-error-404.html">
-              <i className="bi bi-dash-circle"></i>
-              <span>Error 404</span>
-            </a>
-          </li>
-          {/* <!-- End Error 404 Page Nav --> */}
-
-          <li className="nav-item">
-            <a className="nav-link collapsed" href="pages-blank.html">
-              <i className="bi bi-file-earmark"></i>
-              <span>Blank</span>
-            </a>
-          </li>
-          {/* <!-- End Blank Page Nav --> */}
         </ul>
       </aside>
       {/* <!-- End Sidebar--> */}
-      {/* <!-- End #main --> */}
+      <main id="main" className="main">
+        <div className="pagetitle">
+          <h1>Dashboard</h1>
+          <nav>
+            <ol className="breadcrumb">
+              <li className="breadcrumb-item">
+                <a href="index.html">Home</a>
+              </li>
+              <li className="breadcrumb-item active">Dashboard</li>
+            </ol>
+          </nav>
+        </div>
+        <div className="task-panels">
+          <Link to="/admin/manage-bookings" className="task-panel">
+            <h3>View Bookings</h3>
+            <p>Check all bookings made by users.</p>
+          </Link>
+          <Link to="/admin/manage-vehicles" className="task-panel">
+            <h3>Manage Vehicles</h3>
+            <p>Add, edit, or remove vehicles from the inventory.</p>
+          </Link>
+          <Link to="/users" className="task-panel">
+            <h3>Manage Users</h3>
+            <p>View and manage user accounts.</p>
+          </Link>
+          <Link to="/locations" className="task-panel">
+            <h3>Manage Locations</h3>
+            <p>Update rental locations across Zambia.</p>
+          </Link>
+        </div>
+        <section class="section dashboard">
+          <div class="row">
+            {/* <!-- Left side columns --> */}
+            <div class="col-lg-8">
+              <div class="row">
+                {/* <!-- Sales Card --> */}
+                <div class="col-xxl-4 col-md-6">
+                  <div class="card info-card sales-card">
+                    <div class="filter">
+                      <a class="icon" href="#" data-bs-toggle="dropdown">
+                        <i class="bi bi-three-dots"></i>
+                      </a>
+                      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                        <li class="dropdown-header text-start">
+                          <h6>Filter</h6>
+                        </li>
+
+                        <li>
+                          <a class="dropdown-item" href="#">
+                            Today
+                          </a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="#">
+                            This Month
+                          </a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="#">
+                            This Year
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="card-body">
+                      <h5 class="card-title">
+                        Sales <span>| Today</span>
+                      </h5>
+
+                      <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                          <i class="bi bi-cart"></i>
+                        </div>
+                        <div class="ps-3">
+                          <h6>145</h6>
+                          <span class="text-success small pt-1 fw-bold">
+                            12%
+                          </span>{" "}
+                          <span class="text-muted small pt-2 ps-1">
+                            increase
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* <!-- End Sales Card --> */}
+
+                {/* <!-- Revenue Card --> */}
+                <div class="col-xxl-4 col-md-6">
+                  <div class="card info-card revenue-card">
+                    <div class="filter">
+                      <a class="icon" href="#" data-bs-toggle="dropdown">
+                        <i class="bi bi-three-dots"></i>
+                      </a>
+                      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                        <li class="dropdown-header text-start">
+                          <h6>Filter</h6>
+                        </li>
+
+                        <li>
+                          <a class="dropdown-item" href="#">
+                            Today
+                          </a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="#">
+                            This Month
+                          </a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="#">
+                            This Year
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="card-body">
+                      <h5 class="card-title">
+                        Revenue <span>| This Month</span>
+                      </h5>
+
+                      <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                          <i class="bi bi-currency-dollar"></i>
+                        </div>
+                        <div class="ps-3">
+                          <h6>$3,264</h6>
+                          <span class="text-success small pt-1 fw-bold">
+                            8%
+                          </span>{" "}
+                          <span class="text-muted small pt-2 ps-1">
+                            increase
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* <!-- End Revenue Card --> */}
+              </div>
+            </div>
+
+            {/* <!-- Right side columns --> */}
+          </div>
+        </section>
+      </main>
       Home
     </>
   );
