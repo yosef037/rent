@@ -1,0 +1,58 @@
+.vehicles-available {
+  padding: 40px 20px; /* Padding for top and bottom */
+}
+
+.vehicles-available h2 {
+  text-align: center; /* Center heading */
+  margin-bottom: 30px; /* Space below heading */
+}
+
+.vehicle-cards {
+  display: grid; /* Use grid layout */
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(300px, 1fr)
+  ); /* Responsive grid */
+  gap: 20px; /* Space between cards */
+}
+
+.vehicle-card {
+  background-color: #ffffff; /* White background for cards */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  padding: 20px; /* Padding inside cards */
+  text-align: center; /* Center text inside cards */
+}
+
+.vehicle-image {
+  width: 100%; /* Full width for images */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 10px; /* Rounded corners for images */
+}
+
+.btn-details {
+  margin-top: 10px; /* Space above button */
+  padding: 10px; /* Padding for button */
+  border-radius: 5px; /* Rounded corners for button */
+  background-color: #c40928; /* Bootstrap primary color */
+  color: white; /* White text color */
+  border: none; /* Remove default border */
+}
+
+.btn-details:hover {
+  background-color: #c40928; /* Darker shade on hover for button */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px; /* Space above buttons */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .vehicles-available h2 {
+    font-size: 1.5rem; /* Smaller heading size on mobile */
+  }
+}

@@ -1,0 +1,74 @@
+vehicle-rentals-backend/
+│
+├── config/
+│   └── config.js
+├── controllers/
+│   ├── authController.js
+│   ├── bookingController.js
+│   ├── faultController.js
+│   ├── outletController.js
+│   └── vehicleController.js
+├── models/
+│   ├── userModel.js
+│   ├── vehicleModel.js
+│   ├── bookingModel.js
+│   ├── outletModel.js
+│   └── faultModel.js
+├── routes/
+│   ├── authRoutes.js
+│   ├── bookingRoutes.js
+│   ├── faultRoutes.js
+│   ├── outletRoutes.js
+│   └── vehicleRoutes.js
+├── middlewares/
+│   └── authMiddleware.js
+├── utils/
+│   └── generateToken.js
+├── .env
+├── app.js
+└── package.json
+
+
+vehicle-rentals-frontend/
+│
+├── public/
+│
+├── src/
+│   ├── components/
+│   │   ├── Header.js
+│   │   ├── Footer.js
+│   │   ├── VehicleList.js
+│   │   ├── VehicleForm.js
+│   │   └── BookingForm.js
+│   │
+│   ├── pages/
+│   │   ├── HomePage.js
+│   │   ├── VehiclesPage.js
+│   │   ├── BookingsPage.js
+│   │   └── LoginPage.js
+│   │
+│   ├── App.js
+│   ├── index.js
+│   ├── api/
+│   │   └── api.js
+│   ├── utils/
+│   │   └── auth.js
+│   └── styles/
+│       ├── App.css
+│       └── Components.css
+│
+├── .env
+└── package.json
+
+
+project/
+│
+├── server.js            # Main server file
+├── routes/
+│   └── auth.js          # Authentication routes (register, login, protected routes)
+├── middleware/
+│   └── auth.js          # Middleware for authentication and authorization
+├── models/
+│   └── User.js          # User schema
+└── config/
+    └── db.js            # Database connection

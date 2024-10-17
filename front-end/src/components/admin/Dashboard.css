@@ -1,0 +1,70 @@
+.admin-dashboard {
+  padding: 20px; /* Padding for the dashboard */
+  background-color: #f4f4f4; /* Light background color */
+  min-height: 100vh; /* Full height */
+}
+
+.dashboard-header {
+  text-align: center; /* Center text */
+  margin-bottom: 30px; /* Space below header */
+}
+
+.dashboard-header h1 {
+  font-size: 2.5rem; /* Heading size */
+}
+
+.dashboard-header p {
+  font-size: 1.2rem; /* Subheading size */
+}
+
+.dashboard-content {
+  display: grid; /* Use grid layout */
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(250px, 1fr)
+  ); /* Responsive grid */
+  gap: 20px; /* Space between panels */
+}
+
+.task-panels {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping of panels */
+}
+
+.task-panel {
+  background-color: #007bff; /* Panel background color */
+  color: white; /* White text color */
+  border-radius: 10px; /* Rounded corners */
+  padding: 20px; /* Padding inside panels */
+  text-align: center; /* Center text inside panels */
+  text-decoration: none; /* Remove underline from links */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.task-panel:hover {
+  background-color: #0056b3; /* Darker shade on hover for panels */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.task-panel h3 {
+  margin-bottom: 10px; /* Space below heading */
+}
+
+.task-panel p {
+  font-size: 0.9rem; /* Smaller paragraph size */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 10px; /* Less padding on small screens */
+  }
+
+  .dashboard-header h1 {
+    font-size: 2rem; /* Smaller heading size on mobile */
+  }
+
+  .task-panel h3 {
+    font-size: 1.2rem; /* Smaller heading size on mobile */
+  }
+}

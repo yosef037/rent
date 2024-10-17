@@ -1,0 +1,67 @@
+.container {
+    max-width: 1200px; /* Limit the width of the container */
+}
+
+.vehicle-detail h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.image-gallery {
+    display: flex; /* Use flexbox for the image gallery */
+    flex-wrap: wrap; /* Allow wrapping of images */
+    justify-content: center; /* Center images horizontally */
+}
+
+.image-gallery img {
+    width: calc(100% / 3 - 20px); /* Responsive images */
+    height: auto; /* Maintain aspect ratio */
+    margin: 10px; /* Space around images */
+    border-radius: 8px; /* Rounded corners for images */
+}
+
+.details-section {
+    margin-top: 20px;
+}
+
+.details-section h3 {
+    font-size: 1.75rem;
+}
+
+.details-section ul {
+    list-style-type: none; /* Remove default list styling */
+    padding-left: 0; /* Remove padding */
+}
+
+.details-section li {
+    margin-bottom: 10px; /* Space between list items */
+}
+
+.text-danger {
+    color: #dc3545; /* Bootstrap danger text color */
+}
+
+/* Booking form styles */
+.booking-form {
+    margin-top: 20px;
+}
+
+.booking-form .form-group {
+    margin-bottom: 15px; /* Space between form groups */
+}
+
+.booking-form label {
+    font-weight: bold; /* Make labels bold */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Bootstrap primary color */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .image-gallery img {
+        width: calc(100% - 20px); /* Full width on small screens */
+        margin: auto; /* Center images with margin */
+    }
+}

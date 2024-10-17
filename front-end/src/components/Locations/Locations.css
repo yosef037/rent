@@ -1,0 +1,36 @@
+.locations-container {
+    max-width: 800px; /* Limit width for better readability */
+    margin: auto; /* Center the container */
+    padding: 20px; /* Add padding */
+    text-align: center; /* Center text */
+  }
+  
+  .locations-container h1 {
+    font-size: 2.5rem; /* Heading size */
+    margin-bottom: 20px; /* Space below heading */
+  }
+  
+  .locations-container p {
+    font-size: 1.2rem; /* Paragraph size */
+    color: #555; /* Gray color for text */
+  }
+  
+  .map-container {
+    margin-top: 20px; /* Space above map */
+  }
+  
+  /* Responsive adjustments for smaller screens */
+  @media (max-width: 768px) {
+    .locations-container {
+      padding: 10px; /* Less padding on small screens */
+    }
+  
+    .locations-container h1 {
+      font-size: 2rem; /* Smaller heading size on mobile */
+    }
+  
+    .locations-container p {
+      font-size: 1rem; /* Smaller paragraph size on mobile */
+    }
+  }
+  

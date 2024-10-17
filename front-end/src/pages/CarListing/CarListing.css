@@ -1,0 +1,34 @@
+.container {
+  max-width: 1200px;
+}
+
+.card {
+  transition: transform 0.2s; /* Animation */
+}
+
+.card:hover {
+  transform: scale(1.05); /* Scale effect on hover */
+}
+
+.image-gallery img {
+  width: 100%; /* Make images responsive */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.btn-primary {
+  background-color: #007bff; /* Bootstrap primary color */
+}
+
+.btn-danger {
+  background-color: #dc3545; /* Bootstrap danger color */
+}
+
+.text-danger {
+  color: #dc3545; /* Bootstrap danger text color */
+}
+
+.mt-4 {
+  margin-top: 1.5rem !important; /* Margin top */
+}
+
+/* Add any additional styles you want here */

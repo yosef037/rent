@@ -1,0 +1,84 @@
+/* * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+} */
+
+.navbar img {
+  width: 100px;
+}
+
+/*Header Start*/
+/* .header img{
+  width: 100px;
+} */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* background-image: url(/front-end/src/assets/images/pic8.jpg); */
+  padding: 0px 30px;
+  background-image: linear-gradient(to right, #000c14, #f8002f);
+  background-size: cover;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 0;
+  left: 0;
+}
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar li {
+  list-style: none;
+  padding: 0 20px;
+  position: relative;
+}
+
+.navbar li a {
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  transition: 0.3s ease;
+}
+
+.navbar li a:hover,
+.navbar li a.active {
+  color: #c40928;
+}
+
+.navbar li a.active::after,
+.navbar li a:hover::after {
+  content: "";
+  width: 30%;
+  height: 2px;
+  background: #c40928;
+  position: absolute;
+  bottom: -4px;
+  left: 20px;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  gap: 10px;
+  transition: 0.5s ease;
+  cursor: pointer;
+}
+
+
+.links button:hover, 
+.links button:active{
+  background: #c40928;
+  color: white;
+}
+/* #mobile{
+  display: none;
+  align-items: center;
+} */

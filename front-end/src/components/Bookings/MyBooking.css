@@ -1,0 +1,37 @@
+.container {
+  max-width: 800px;
+  margin: auto;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.booking-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.booking-table th,
+.booking-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.booking-table th {
+  background-color: #f4f4f4;
+}
+
+.booking-table tr:hover {
+  background-color: #f1f1f1; /* Highlight row on hover */
+}
+
+.text-danger {
+  color: red; /* Style for error messages */
+}
+
+img {
+  border-radius: 5px; /* Rounded corners for images */
+}

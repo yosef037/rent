@@ -1,0 +1,105 @@
+.footer {
+  background-color: #000c14; /* Dark background color */
+  color: white; /* White text color */
+  padding: 40px 20px; /* Padding for top and bottom */
+  display: grid; /* Use grid layout */
+  grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+  gap: 20px; /* Space between columns */
+}
+
+.footer-content {
+  text-align: center; /* Center text in this section */
+}
+
+.footer h3 {
+  font-size: 2rem; /* Heading size */
+}
+
+.footer p {
+  font-size: 1rem; /* Paragraph size */
+}
+
+.newsletter-form {
+  display: flex; /* Use flexbox for alignment */
+  justify-content: center; /* Center items horizontally */
+}
+
+.newsletter-form input {
+  padding: 10px; /* Padding inside input field */
+  border-radius: 20px; /* Rounded corners */
+  border: none; /* Remove default border */
+}
+
+.newsletter-form button {
+  padding: 10px 20px; /* Padding for button */
+  border-radius: 20px; /* Rounded corners */
+  background-color: #f8002f; /* Button color matching navbar */
+  color: white; /* White text color */
+  border: none; /* Remove default border */
+}
+
+.footer-links {
+  text-align: center;
+  cursor: pointer;
+  transition: 0.6s;
+}
+.footer-links :hover {
+  color: #c40928;
+}
+
+.footer-links h4 {
+  margin-bottom: 10px;
+}
+
+.footer-links ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.footer-links li {
+  margin-bottom: 5px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: white;
+}
+
+.footer-socials {
+  text-align: center;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Space between icons */
+}
+
+.footer-socials h4 {
+  margin-bottom: 10px;
+}
+
+.footer-bottom {
+  grid-column: span 3; /* Span all columns for copyright notice */
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .footer {
+    grid-template-columns: repeat(
+      1,
+      1fr
+    ); /* Stack all sections on small screens */
+    padding: 20px;
+  }
+
+  .footer h3,
+  .footer p,
+  .footer-links h4,
+  .footer-socials h4 {
+    font-size: 0.9rem; /* Smaller font size on mobile */
+  }
+}

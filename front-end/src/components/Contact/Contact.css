@@ -1,0 +1,58 @@
+.contact-container {
+  max-width: 800px; /* Limit width for better readability */
+  margin: auto; /* Center the container */
+  padding: 40px; /* Add padding */
+  background-color: #f8f9fa; /* Light background color */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+}
+
+.contact-container h1 {
+  text-align: center; /* Center heading */
+  margin-bottom: 20px; /* Space below heading */
+}
+
+.contact-info {
+  margin-bottom: 30px; /* Space below contact info */
+}
+
+.contact-info h2 {
+  margin-bottom: 10px; /* Space below subheading */
+}
+
+.contact-form {
+  display: flex; /* Use flexbox for alignment */
+  flex-direction: column; /* Stack elements vertically */
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 10px; /* Padding inside input fields */
+  margin-bottom: 15px; /* Space between fields */
+  border-radius: 5px; /* Rounded corners */
+  border: 1px solid #ccc; /* Light gray border */
+}
+
+.contact-form button {
+  padding: 10px; /* Padding for button */
+  border-radius: 5px; /* Rounded corners */
+  background-color: #007bff; /* Bootstrap primary color */
+  color: white; /* White text color */
+  border: none; /* Remove default border */
+}
+
+.contact-form button:hover {
+  background-color: #0056b3; /* Darker shade on hover for button */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .contact-container {
+    padding: 20px; /* Less padding on small screens */
+  }
+
+  .contact-container h1 {
+    font-size: 1.5rem; /* Smaller heading size on mobile */
+  }
+}

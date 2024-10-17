@@ -1,0 +1,53 @@
+.newsletter {
+  width: 80%; /* Adjusted width for better responsiveness */
+  max-width: 800px; /* Maximum width */
+  margin: auto; /* Center the newsletter */
+  padding: 40px; /* Add padding for spacing */
+  border-radius: 10px; /* Rounded corners */
+  background: linear-gradient(
+    135deg,
+    #f3e5f5,
+    #e1f5fe
+  ); /* Gradient background */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  text-align: center; /* Center text */
+}
+
+.newsletter h1 {
+  color: #333; /* Darker color for better contrast */
+  font-size: 2.5rem; /* Adjusted font size */
+  margin-bottom: 15px; /* Space below heading */
+}
+
+.newsletter p {
+  color: #555; /* Slightly lighter color for paragraph */
+  font-size: 1.2rem; /* Adjusted font size */
+  margin-bottom: 30px; /* Space below paragraph */
+}
+
+.input-container {
+  display: flex; /* Use flexbox for alignment */
+  justify-content: center; /* Center items horizontally */
+}
+
+.newsletter input {
+  width: 70%; /* Width of email input field */
+  padding: 10px; /* Padding inside input field */
+  border-radius: 20px; /* Rounded corners for input */
+  border: none; /* Remove default border */
+  box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.1); /* Inner shadow effect */
+}
+
+.newsletter button {
+  padding: 10px 20px; /* Padding around button text */
+  border-radius: 20px; /* Rounded corners for button */
+  background-color: #007bff; /* Bootstrap primary color */
+  color: white; /* White text color for button */
+  border: none; /* Remove default border */
+  margin-left: -5px; /* Adjust margin to overlap with input slightly */
+}
+
+.newsletter button:hover {
+  background-color: #0056b3; /* Darker shade on hover for button */
+  cursor: pointer; /* Pointer cursor on hover */
+}
