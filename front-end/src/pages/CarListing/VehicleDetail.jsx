@@ -3,8 +3,9 @@ import axios from "../../api/axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../UserLogin/Authmodel"; // Import user context
 import "./VehicleDetail.css"; // Import your CSS file
+import { Link } from "react-router-dom";
 
-const VehicleDetail = () => {
+const VehicleDetail = ({ setShowLogin }) => {
   const { id } = useParams(); // Get vehicle ID from URL parameters
   const [vehicle, setVehicle] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
@@ -139,113 +140,27 @@ const VehicleDetail = () => {
             onChange={handleInputChange}
           />
         </div>
-        <button type="submit" className="btn btn-primary">
-          Book Now
-        </button>
+        {user ? (
+          <Link
+            to={`/vehicles/${vehicle.Vehicle_Id}`}
+            state={{ userEmail: user.Email }} // Pass user email via state
+          >
+            <button className="btn-details">Book This Vehicle</button>
+          </Link>
+        ) : (
+          <button
+            className="btn-details"
+            onClick={() => {
+              alert("Please log in to book.");
+              setShowLogin(true);
+            }}
+          >
+            Login to Book
+          </button>
+        )}
       </form>
     </div>
   );
 };
 
 export default VehicleDetail;
-
-// import React, { useEffect, useState } from "react";
-// import axios from "../../api/axios";
-// import { useParams } from "react-router-dom";
-// import "./VehicleDetail.css"; // Import your CSS file
-// import { useAuth } from "../UserLogin/Authmodel";
-// import { Link } from "react-router-dom";
-
-// const VehicleDetail = ({ setShowLogin }) => {
-//   const { id } = useParams(); // Get vehicle ID from URL parameters
-//   const [vehicle, setVehicle] = useState(null);
-//   const [errorMessage, setErrorMessage] = useState("");
-//   const { user } = useAuth(); // Get user data from Auth context
-
-//   useEffect(() => {
-//     const fetchVehicleDetails = async () => {
-//       try {
-//         const response = await axios.get(
-//           `http://localhost:5000/vehicles/${id}`
-//         );
-//         setVehicle(response.data);
-//       } catch (error) {
-//         console.error("Error fetching vehicle details:", error);
-//         setErrorMessage("Failed to load vehicle details.");
-//       }
-//     };
-
-//     fetchVehicleDetails();
-//   }, [id]);
-
-//   if (errorMessage) {
-//     return <p className="text-danger">{errorMessage}</p>;
-//   }
-
-//   if (!vehicle) {
-//     return <p>Loading vehicle details...</p>;
-//   }
-
-//   return (
-//     <div className="container mt-4 vehicle-detail">
-//       <h1>{`${vehicle.Make} ${vehicle.Model}`}</h1>
-//       {/* Display all images */}
-//       <div className="image-gallery">
-//         {[1, 2, 3, 4, 5].map((index) =>
-//           vehicle[`Image_${index}`] ? (
-//             <img
-//               key={index}
-//               src={`http://localhost:5000${vehicle[`Image_${index}`]}`}
-//               alt={`${vehicle.Make} ${vehicle.Model} Image ${index}`}
-//               className="img-fluid"
-//             />
-//           ) : null
-//         )}
-//       </div>
-//       {/* Additional vehicle details */}
-//       <div className="details-section">
-//         <h3>Description</h3>
-//         <p>{vehicle.Vehicle_Description}</p>
-//         <h3>Details</h3>
-//         <ul>
-//           <li>
-//             <strong>Year:</strong> {vehicle.Year}
-//           </li>
-//           <li>
-//             <strong>Color:</strong> {vehicle.Color}
-//           </li>
-//           <li>
-//             <strong>Fuel Type:</strong> {vehicle.Fuel_Type}
-//           </li>
-//           <li>
-//             <strong>Seating Capacity:</strong> {vehicle.Seating_Capacity}
-//           </li>
-//           <li>
-//             <strong>Status:</strong> {vehicle.Status}
-//           </li>
-//           <li>
-//             <strong>Price per Day:</strong> ${vehicle.Price_Per_Day}
-//           </li>
-//         </ul>
-//       </div>
-//       {user ? ( // Check if user is logged in
-//         <Link
-//           to={`/booking/${vehicle.Vehicle_Id}`}
-//           state={{ userEmail: user.Email }} // Pass user email via state
-//           className="btn btn-primary"
-//         >
-//           Book This Vehicle
-//         </Link>
-//       ) : (
-//         <button
-//           className="btn btn-primary"
-//           onClick={() => setShowLogin(true)} // Show login modal
-//         >
-//           Login to Book
-//         </button>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default VehicleDetail;

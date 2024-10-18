@@ -1,0 +1,30 @@
+.admin-account-settings {
+  padding: 20px;
+  margin-left: 300px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: calc(100% - 10px);
+  padding: 8px;
+}
+
+button {
+  padding: 10px;
+  background-color: #007bff; /* Blue background */
+  color: white; /* White text */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}

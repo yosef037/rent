@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import AdminNav from "./AdminNav";
 
 const ManageBooking = () => {
   const [bookings, setBookings] = useState([]);
@@ -65,60 +66,62 @@ const ManageBooking = () => {
   };
 
   return (
-    <div className="container mt-4">
-      <h1>Manage Bookings</h1>
-      {errorMessage && <p className="text-danger">{errorMessage}</p>}
+    <>
+      <AdminNav />
+      <div className="container mt-4">
+        <h1>Manage Bookings</h1>
+        {errorMessage && <p className="text-danger">{errorMessage}</p>}
 
-      <h2>Bookings</h2>
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Booking ID</th>
-            <th>Booking Number</th>
-            <th>Vehicle ID</th>
-            <th>Email</th>
-            <th>Status</th>
-            <th>Message</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {bookings.map((booking) => (
-            <tr key={booking.Booking_Id}>
-              <td>{booking.Booking_Id}</td>
-              <td>{booking.Booking_Number}</td>
-              <td>{booking.Vehicle_Id}</td>
-              <td>{booking.Email}</td>
-              <td>{booking.Status}</td>
-              <td>{booking.Message}</td>
-              <td>{new Date(booking.Start_Date).toLocaleDateString()}</td>
-              <td>{new Date(booking.End_Date).toLocaleDateString()}</td>
-              <td>
-                {booking.Status === "pending" && (
-                  <>
-                    <button
-                      className="btn btn-success"
-                      onClick={() => confirmBooking(booking.Booking_Id)}
-                    >
-                      Confirm
-                    </button>
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => rejectBooking(booking.Booking_Id)}
-                    >
-                      Reject
-                    </button>
-                  </>
-                )}
-              </td>
+        <h2>Bookings</h2>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Booking ID</th>
+              <th>Booking Number</th>
+              <th>Vehicle ID</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Message</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-
-    </div>
+          </thead>
+          <tbody>
+            {bookings.map((booking) => (
+              <tr key={booking.Booking_Id}>
+                <td>{booking.Booking_Id}</td>
+                <td>{booking.Booking_Number}</td>
+                <td>{booking.Vehicle_Id}</td>
+                <td>{booking.Email}</td>
+                <td>{booking.Status}</td>
+                <td>{booking.Message}</td>
+                <td>{new Date(booking.Start_Date).toLocaleDateString()}</td>
+                <td>{new Date(booking.End_Date).toLocaleDateString()}</td>
+                <td>
+                  {booking.Status === "pending" && (
+                    <>
+                      <button
+                        className="btn btn-success"
+                        onClick={() => confirmBooking(booking.Booking_Id)}
+                      >
+                        Confirm
+                      </button>
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => rejectBooking(booking.Booking_Id)}
+                      >
+                        Reject
+                      </button>
+                    </>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 };
 

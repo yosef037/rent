@@ -2,13 +2,13 @@ import React from "react";
 import "./Home.css"; // Import CSS for styling
 import VehiclesAvailable from "../../components/VehicleAvailable/VehiclesAvailable";
 
-const Home = () => {
+const Home = ({ setShowLogin, onRequestClose }) => {
   return (
     <div className="home">
       <header className="hero-section">
-        <h1>Welcome to Vehicle Rental</h1>
+        <h1>Welcome to Our Vehicle Rental Service</h1>
         <p>Your one-stop solution for renting vehicles in Zambia.</p>
-      <VehiclesAvailable />
+        <VehiclesAvailable setShowLogin={setShowLogin} />
         <button className="btn-explore">Explore Now</button>
       </header>
 

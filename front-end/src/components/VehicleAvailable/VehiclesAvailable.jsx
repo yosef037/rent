@@ -4,7 +4,7 @@ import "./VehiclesAvailable.css"; // Import CSS for styling
 import { Link } from "react-router-dom";
 import { useAuth } from "../../pages/UserLogin/Authmodel";
 
-const VehiclesAvailable = () => {
+const VehiclesAvailable = ({ setShowLogin }) => {
   const [vehicles, setVehicles] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const { user } = useAuth(); // Get user data from Auth context
@@ -64,7 +64,10 @@ const VehiclesAvailable = () => {
               ) : (
                 <button
                   className="btn-details"
-                  onClick={() => alert("Please log in to book.")}
+                  onClick={() => {
+                    alert("Please Log in to Book");
+                    setShowLogin(true);
+                  }}
                 >
                   Login to Book
                 </button>

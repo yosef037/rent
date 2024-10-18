@@ -29,36 +29,3 @@ const BookingList = () => {
 };
 
 export default BookingList;
-
-// const BookingList = () => {
-//     const [bookings, setBookings] = useState([]);
-
-//     useEffect(() => {
-//         axios.get('http://localhost:5000/bookings')
-//             .then(response => {
-//                 setBookings(response.data);
-//             })
-//             .catch(error => {
-//                 console.error('Error fetching bookings:', error);
-//             });
-//     }, []);
-
-//     return (
-//         <div>
-//             <h2>All Bookings</h2>
-//             <ul>
-//                 {bookings.map(booking => (
-//                     <li key={booking.Booking_Id}>
-
-//                         {console.log(booking.Vehicle_Id)}
-//                         Vehicle {booking.Vehicle_Id} booked by User {booking.User_Id}
-//                         from {booking.Start_Date} to {booking.End_Date}
-//                         (Status: {booking.Status})
-//                     </li>
-//                 ))}
-//             </ul>
-//         </div>
-//     );
-// };
-
-// export default BookingList;

@@ -21,7 +21,7 @@ const RegisterPage = ({ setShowLogin, onRequestClose }) => {
     try {
       const res = await axios.post("http://localhost:5000/register", values);
       if (res.data.Status === "Success") {
-        alert("Registered Successfully")
+        alert("Registered Successfully");
         setShowLogin(false);
       } else {
         alert("Error during registration");
@@ -74,13 +74,6 @@ const RegisterPage = ({ setShowLogin, onRequestClose }) => {
             onChange={(e) => setValues({ ...values, Password: e.target.value })}
             required
           />
-
-          <select
-            onChange={(e) => setValues({ ...values, Role: e.target.value })}
-          >
-            <option value="user">User</option>
-            <option value="admin">Administrator</option>
-          </select>
         </div>
         <button>Create Account</button>
         <div className="loginPopup-condition">

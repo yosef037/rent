@@ -43,6 +43,90 @@ app.use(
 );
 app.use(cookieParser());
 
+// Get count of bookings
+app.get(
+  "/admin/bookings/count",
+  verifyToken,
+  authorizeRole("admin"),
+  (req, res) => {
+    const query = "SELECT COUNT(*) AS count FROM bookings"; // Adjust based on your database schema
+    db.query(query, (err, results) => {
+      if (err) {
+        console.error("Error fetching bookings count:", err);
+        return res.status(500).json({ error: err.message });
+      }
+
+      // Log the count received from the database
+      res.json({ count: results[0].count });
+    });
+  }
+);
+
+// Get count of vehicles
+app.get(
+  "/admin/vehicles/count",
+  verifyToken,
+  authorizeRole("admin"),
+  (req, res) => {
+    const query = "SELECT COUNT(*) AS count FROM vehicles"; // Adjust based on your database schema
+    db.query(query, (err, results) => {
+      if (err) {
+        console.error("Error fetching vehicles count:", err);
+        return res.status(500).json({ error: err.message });
+      }
+      res.json({ count: results[0].count });
+    });
+  }
+);
+
+// Get count of users
+app.get(
+  "/admin/users/count",
+  verifyToken,
+  authorizeRole("admin"),
+  (req, res) => {
+    const query = "SELECT COUNT(*) AS count FROM users"; // Adjust based on your database schema
+    db.query(query, (err, results) => {
+      if (err) {
+        console.error("Error fetching users count:", err);
+        return res.status(500).json({ error: err.message });
+      }
+      res.json({ count: results[0].count });
+    });
+  }
+);
+
+// Get count of locations
+app.get(
+  "/admin/locations/count",
+  verifyToken,
+  authorizeRole("admin"),
+  (req, res) => {
+    const query = "SELECT COUNT(*) AS count FROM locations"; // Adjust based on your database schema
+    db.query(query, (err, results) => {
+      if (err) {
+        console.error("Error fetching locations count:", err);
+        return res.status(500).json({ error: err.message });
+      }
+      res.json({ count: results[0].count });
+    });
+  }
+);
+
+// Get all locations
+app.get("/locations", (req, res) => {
+  const query = "SELECT * FROM locations"; // Adjust based on your database schema
+
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error("Error fetching locations:", err);
+      return res.status(500).json({ error: err.message });
+    }
+
+    res.json(results); // Return the list of locations
+  });
+});
+
 // Get all bookings (admin only)
 app.get("/admin/bookings", verifyToken, authorizeRole("admin"), (req, res) => {
   const query = "SELECT * FROM bookings"; // Adjust based on your database schema
@@ -355,12 +439,12 @@ app.get("/vehicles/:id", (req, res) => {
 
   const query = "SELECT * FROM vehicles WHERE Vehicle_Id = ?";
   db.query(query, [vehicleId], (err, result) => {
-      if (err) return res.status(500).json({ error: err.message });
-      if (result.length === 0) return res.status(404).json({ message: "Vehicle not found" });
-      res.json(result[0]); // Return the first matching vehicle
+    if (err) return res.status(500).json({ error: err.message });
+    if (result.length === 0)
+      return res.status(404).json({ message: "Vehicle not found" });
+    res.json(result[0]); // Return the first matching vehicle
   });
 });
-
 
 // Endpoint to get bookings by user email
 app.get("/bookings", (req, res) => {
@@ -389,7 +473,7 @@ app.get("/bookings", (req, res) => {
 });
 
 // API to Create Bookings
-app.post("/bookings", (req, res) => {
+app.post("/bookings", verifyToken, authorizeRole("user"), (req, res) => {
   const { Vehicle_Id, Email, Start_Date, End_Date, Message } = req.body;
   // Generate a unique booking number
   const Booking_Number = `BOOK-${Date.now()}`;
@@ -415,31 +499,38 @@ app.post("/bookings", (req, res) => {
 });
 
 // API to Edit Bookings
-app.put("/bookings/:id/status", (req, res) => {
-  const bookingId = req.params.id;
-  const { status } = req.body; // Expecting { status: 'confirmed' }
+app.put(
+  "/bookings/:id/status",
+  verifyToken,
+  authorizeRole("user"),
+  (req, res) => {
+    const bookingId = req.params.id;
+    const { status } = req.body; // Expecting { status: 'confirmed' }
 
-  const validStatuses = ["pending", "confirmed", "canceled"];
+    const validStatuses = ["pending", "confirmed", "canceled"];
 
-  if (!validStatuses.includes(status)) {
-    return res.status(400).json({ error: "Invalid status value" });
-  }
+    if (!validStatuses.includes(status)) {
+      return res.status(400).json({ error: "Invalid status value" });
+    }
 
-  const query = `
+    const query = `
     UPDATE bookings 
     SET Status = ? 
     WHERE Booking_Id = ?
   `;
 
-  db.query(query, [status, bookingId], (err) => {
-    if (err) {
-      console.error("Error updating booking status:", err);
-      return res.status(500).json({ error: "Failed to update booking status" });
-    }
+    db.query(query, [status, bookingId], (err) => {
+      if (err) {
+        console.error("Error updating booking status:", err);
+        return res
+          .status(500)
+          .json({ error: "Failed to update booking status" });
+      }
 
-    res.json({ message: "Booking status updated successfully" });
-  });
-});
+      res.json({ message: "Booking status updated successfully" });
+    });
+  }
+);
 
 // User Vrification and login
 app.post("/register", (req, res) => {
@@ -475,11 +566,12 @@ app.post("/login", (req, res) => {
         req.body.Password.toString(),
         data[0].Password,
         (err, response) => {
-          if (err) return res.json({ Error: "Password compare error " });
+          if (err) return res.json({ Error: "Password compare error" });
           if (response) {
             const email = data[0].Email;
-            const name = data[0].name;
-            const role = data[0].Role; // Assuming the role is stored in the "role" field of the users table
+            const name = data[0].First_name; // Assuming First_name is stored in the users table
+            const role = data[0].Role; // Assuming Role is stored in the users table
+            const userId = data[0].User_Id; // Get User_Id from database
             const token = jwt.sign({ email, role }, "jwt-secret-key", {
               expiresIn: "1d",
             }); // Include role in token
@@ -487,11 +579,11 @@ app.post("/login", (req, res) => {
 
             return res.json({
               Status: "Success",
-              role: role, // Send role in the response
+              role: role,
               token: token,
               Email: email,
+              User_Id: userId, // Send User_Id in the response
             });
-            console.log(res.data);
           } else {
             return res.json({ Error: "Password not matched" });
           }
@@ -528,7 +620,7 @@ app.post("/vehicles", verifyToken, authorizeRole("admin"), (req, res) => {
 });
 
 // PUT request to update vehicle data
-app.put("/vehicles/:id", (req, res) => {
+app.put("/vehicles/:id", verifyToken, authorizeRole("admin"), (req, res) => {
   const VehicleId = req.params.id;
   const { Make, Model, Year, Color, License_Plate, Status } = req.body;
 
@@ -563,7 +655,7 @@ app.put("/vehicles/:id", (req, res) => {
 });
 
 // DELETE request to delete a vehicle by Vehicle_Id
-app.delete("/vehicles/:id", (req, res) => {
+app.delete("/vehicles/:id", verifyToken, authorizeRole("admin"), (req, res) => {
   const vehicleId = req.params.id;
 
   const sql = "DELETE FROM vehicles WHERE Vehicle_Id = ?";
@@ -583,6 +675,278 @@ app.delete("/vehicles/:id", (req, res) => {
     });
   });
 });
+
+// Get admin account details
+app.get("/admin/account", verifyToken, authorizeRole("admin"), (req, res) => {
+  const query =
+    "SELECT First_name, Last_name, Email, Phone FROM users WHERE User_Id = ?"; // Adjust based on your database schema
+  const userId = req.user.id; // Assuming you have user ID in the token
+
+  db.query(query, [userId], (err, results) => {
+    if (err) {
+      console.error("Error fetching account details:", err);
+      return res.status(500).json({ error: err.message });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({ message: "Admin not found" });
+    }
+
+    res.json(results[0]); // Return admin details
+  });
+});
+
+// Update admin account details
+app.put("/admin/account", verifyToken, authorizeRole("admin"), (req, res) => {
+  const { First_name, Last_name, Email, Phone, Password } = req.body;
+  const userId = req.user.id; // Assuming you have user ID in the token
+
+  // If a password is provided, hash it
+  const updates = [First_name, Last_name, Email, Phone];
+  
+  // Check if password needs to be updated
+  if (Password) {
+    bcrypt.hash(Password, salt, (err, hash) => {
+      if (err) return res.status(500).json({ error: "Error hashing password" });
+      updates.push(hash); // Add hashed password to updates
+      updates.push(userId); // Add userId for the query
+
+      const query = `
+        UPDATE users 
+        SET First_name = ?, Last_name = ?, Email = ?, Phone = ?, Password = ?
+        WHERE User_Id = ?
+      `;
+
+      db.query(query, updates, (err) => {
+        if (err) {
+          console.error("Error updating account details:", err);
+          return res.status(500).json({ error: "Failed to update account" });
+        }
+        res.json({ message: "Account updated successfully" });
+      });
+    });
+  } else {
+    updates.push(userId); // Add userId for the query
+
+    const query = `
+      UPDATE users 
+      SET First_name = ?, Last_name = ?, Email = ?, Phone = ?
+      WHERE User_Id = ?
+    `;
+
+    db.query(query, [...updates], (err) => {
+      if (err) {
+        console.error("Error updating account details:", err);
+        return res.status(500).json({ error: "Failed to update account" });
+      }
+      res.json({ message: "Account updated successfully" });
+    });
+  }
+});
+
+
+// Update user details
+app.put(
+  "/users/update-user",
+  verifyToken,
+  authorizeRole("user"),
+  (req, res) => {
+    const { First_name, Last_name, Email, Password, Phone, User_Id } = req.body;
+
+    if (!User_Id) {
+      console.log("User ID is missing in the request.");
+      return res.status(400).json({ Error: "User ID is required." });
+    }
+
+    // Prepare SQL query for updating user details
+    let sql =
+      "UPDATE users SET First_name = ?, Last_name = ?, Phone = ?, Email = ?";
+    const values = [First_name, Last_name, Phone, Email];
+
+    // Hash password if provided
+    if (Password) {
+      const hashedPassword = bcrypt.hashSync(Password, salt);
+      sql += ", Password = ?";
+      values.push(hashedPassword); // Add hashed password to values
+    }
+
+    sql += " WHERE User_Id = ?";
+    values.push(User_Id); // Add User_Id to values
+
+    db.query(sql, values, (err, result) => {
+      if (err) {
+        console.error("Error updating user:", err);
+        return res.status(500).json({ Error: "Error updating user" });
+      }
+
+      if (result.affectedRows > 0) {
+        console.log(`User with ID ${User_Id} updated successfully.`);
+        return res.json({
+          Status: "Success",
+          message: "User updated successfully",
+        });
+      } else {
+        console.log(`User with ID ${User_Id} not found.`);
+        return res.status(404).json({ Error: "User not found" });
+      }
+    });
+  }
+);
+
+// Get all users (admin only)
+app.get("/admin/users", verifyToken, authorizeRole("admin"), (req, res) => {
+  const query = "SELECT * FROM users"; // Adjust based on your database schema
+
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error("Error fetching users:", err);
+      return res.status(500).json({ error: err.message });
+    }
+    res.json(results);
+  });
+});
+
+// Update user role
+app.put(
+  "/admin/users/:id/role",
+  verifyToken,
+  authorizeRole("admin"),
+  (req, res) => {
+    const userId = req.params.id;
+    const { role } = req.body; // Expecting { role: 'admin' }
+
+    const validRoles = ["admin", "user"];
+
+    if (!validRoles.includes(role)) {
+      return res.status(400).json({ error: "Invalid role value" });
+    }
+
+    const query = "UPDATE users SET Role = ? WHERE User_Id = ?";
+
+    db.query(query, [role, userId], (err) => {
+      if (err) {
+        console.error("Error updating user role:", err);
+        return res.status(500).json({ error: "Failed to update user role" });
+      }
+
+      res.json({ message: "User role updated successfully" });
+    });
+  }
+);
+
+// Update user details
+app.put("/admin/users/:id", verifyToken, authorizeRole("admin"), (req, res) => {
+  const userId = req.params.id;
+  const { First_name, Last_name, Email, Phone } = req.body;
+
+  const query = `
+    UPDATE users 
+    SET First_name = ?, Last_name = ?, Email = ?, Phone = ?
+    WHERE User_Id = ?
+  `;
+
+  db.query(query, [First_name, Last_name, Email, Phone, userId], (err) => {
+    if (err) {
+      console.error("Error updating user:", err);
+      return res.status(500).json({ error: "Failed to update user" });
+    }
+
+    res.json({ message: "User updated successfully" });
+  });
+});
+
+// Delete user
+app.delete(
+  "/admin/users/:id",
+  verifyToken,
+  authorizeRole("admin"),
+  (req, res) => {
+    const userId = req.params.id;
+
+    const query = "DELETE FROM users WHERE User_Id = ?";
+
+    db.query(query, [userId], (err, result) => {
+      if (err) {
+        console.error("Error deleting user:", err);
+        return res.status(500).json({ error: "Failed to delete user" });
+      }
+
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      res.json({ message: "User deleted successfully" });
+    });
+  }
+);
+
+// Get all locations (admin only)
+app.get("/admin/locations", verifyToken, authorizeRole("admin"), (req, res) => {
+  const query = "SELECT * FROM locations"; // Adjust based on your database schema
+
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error("Error fetching locations:", err);
+      return res.status(500).json({ error: err.message });
+    }
+    res.json(results);
+  });
+});
+
+// Update location details
+app.put(
+  "/admin/locations/:id",
+  verifyToken,
+  authorizeRole("admin"),
+  (req, res) => {
+    const locationId = req.params.id;
+    const { Location_Name, Address, City, Country } = req.body;
+
+    const query = `
+    UPDATE locations 
+    SET Location_Name = ?, Address = ?, City = ?, Country = ?
+    WHERE Location_Id = ?
+  `;
+
+    db.query(
+      query,
+      [Location_Name, Address, City, Country, locationId],
+      (err) => {
+        if (err) {
+          console.error("Error updating location:", err);
+          return res.status(500).json({ error: "Failed to update location" });
+        }
+
+        res.json({ message: "Location updated successfully" });
+      }
+    );
+  }
+);
+
+// Delete location
+app.delete(
+  "/admin/locations/:id",
+  verifyToken,
+  authorizeRole("admin"),
+  (req, res) => {
+    const locationId = req.params.id;
+
+    const query = "DELETE FROM locations WHERE Location_Id = ?";
+
+    db.query(query, [locationId], (err, result) => {
+      if (err) {
+        console.error("Error deleting location:", err);
+        return res.status(500).json({ error: "Failed to delete location" });
+      }
+
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ message: "Location not found" });
+      }
+
+      res.json({ message: "Location deleted successfully" });
+    });
+  }
+);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

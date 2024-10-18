@@ -1,10 +1,12 @@
 import React from "react";
 import "./Locations.css"; // Import CSS for styling
+import LocationsList from "./LocationList";
 
 const Locations = () => {
   return (
     <div className="locations-container">
       <h1>Our Locations in Zambia</h1>
+        <LocationsList />
       <p>Find our rental locations across Zambia.</p>
       <div className="map-container">
         {/* Embed Google Maps */}

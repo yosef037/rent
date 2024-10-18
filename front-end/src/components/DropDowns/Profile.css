@@ -1,0 +1,8 @@
+.dropdown-menu {
+    min-width: 200px; /* Set minimum width for the dropdown */
+  }
+  
+  .dropdown-item:hover {
+    background-color: #f8f9fa; /* Change background color on hover */
+  }
+  

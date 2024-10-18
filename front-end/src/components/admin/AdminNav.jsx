@@ -1,10 +1,7 @@
-import "./AdminDash.css";
-import logo from "../../assets/images/logo.png";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { AiOutlineMessage } from "react-icons/ai";
 import { IoIosSearch } from "react-icons/io";
 import { FaBarsStaggered } from "react-icons/fa6";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { IoCarSportSharp } from "react-icons/io5";
 import { IoCalendarNumberSharp } from "react-icons/io5";
@@ -12,29 +9,32 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { SiHomeassistantcommunitystore } from "react-icons/si";
 import { useAuth } from "../../pages/UserLogin/Authmodel";
-import ProfileDropdown from "../DropDowns/Profile";
-import TaskPanels from "./Dash";
+import { useState } from "react";
+import logo from "../../assets/images/logo.png";
 
-const AdminDash = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // State for sidebar
+const AdminNav = () => {
   const { user, logout } = useAuth(); // Get user and logout function from Auth context
   const handleLogout = () => {
     logout(); // Call the logout function
     navigate("/"); // Redirect to home or login page after logout
   };
-
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen); // Toggle function
   };
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // State for sidebar
+
   return (
-    <>
+    <div>
       <header
         id="header"
         className="header fixed-top d-flex align-items-center"
       >
         <div className="d-flex align-items-center justify-content-between">
-          <Link to={"/admin"} className="logo d-flex align-items-center">
+          <Link to={"/"} className="logo d-flex align-items-center">
             <img src={logo} alt="" />
+            {/* <img src="assets/img/logo.png" alt=""> */}
+
+            {/* <span className="d-none d-lg-block">Admin Dashboard</span> */}
             <span>Admin Dashboard</span>
           </Link>
           {/* <i className="bi bi-list toggle-sidebar-btn"></i> */}
@@ -160,7 +160,7 @@ const AdminDash = () => {
             {/* <!-- End Notification Nav --> */}
 
             <li className="nav-item dropdown">
-              <Link
+              <a
                 className="nav-link nav-icon"
                 href="#"
                 data-bs-toggle="dropdown"
@@ -168,7 +168,7 @@ const AdminDash = () => {
                 {/* <i className="bi bi-chat-left-text"></i> */}
                 <AiOutlineMessage />
                 <span className="badge bg-success badge-number">3</span>
-              </Link>
+              </a>
               {/* <!-- End Messages Icon --> */}
 
               <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
@@ -258,7 +258,7 @@ const AdminDash = () => {
             <li className="nav-item dropdown pe-3">
               <Link
                 className="nav-link nav-profile d-flex align-items-center pe-0"
-                to={"/admin/account-settings"}
+                to={"./admin/account-settings"}
                 data-bs-toggle="dropdown"
                 aria-expanded="false" // Accessibility attribute
               >
@@ -298,10 +298,9 @@ const AdminDash = () => {
                 <li>
                   <Link
                     className="dropdown-item d-flex align-items-center"
-                    to="/admin/account-settings"
+                    to="/admin/account-settings" // Change this to your actual settings route
                   >
                     <i className="bi bi-gear"></i>
-
                     <span>Account Settings</span>
                   </Link>
                 </li>
@@ -350,7 +349,7 @@ const AdminDash = () => {
         {/* <aside id="sidebar" className="sidebar"> */}
         <ul className="sidebar-nav" id="sidebar-nav">
           <li className="nav-item">
-            <Link className="nav-link " href="index.html">
+            <Link className="nav-link " to={"/admin"}>
               <SiHomeassistantcommunitystore />
               <span>Dashboard</span>
             </Link>
@@ -372,16 +371,16 @@ const AdminDash = () => {
           </li>
 
           <li className="nav-item">
-            <Link className="nav-link collapsed" href="pages-contact.html">
+            <Link className="nav-link collapsed" to={"/admin/manage-users"}>
               <FaRegUserCircle />
               <span>Manage Users</span>
             </Link>
           </li>
 
           <li className="nav-item">
-            <Link className="nav-link collapsed" href="pages-register.html">
+            <Link className="nav-link collapsed" to={"/admin/manage-locations"}>
               <FaLocationDot />
-              <span>Locations</span>
+              <span>Manage Locations</span>
             </Link>
           </li>
 
@@ -393,140 +392,7 @@ const AdminDash = () => {
           </li>
         </ul>
       </aside>
-      <main id="main" className="main">
-        <div className="pagetitle">
-          <h1>Dashboard</h1>
-          <nav>
-            <ol className="breadcrumb">
-              <li className="breadcrumb-item">
-                <Link to={"/admin"}>Home</Link>
-              </li>
-              <li className="breadcrumb-item active">Dashboard</li>
-            </ol>
-          </nav>
-        </div>
-
-        <TaskPanels />
-        <section class="section dashboard">
-          <div class="row">
-            {/* <!-- Left side columns --> */}
-            <div class="col-lg-8">
-              <div class="row">
-                {/* <!-- Sales Card --> */}
-                <div class="col-xxl-4 col-md-6">
-                  <div class="card info-card sales-card">
-                    <div class="filter">
-                      <a class="icon" href="#" data-bs-toggle="dropdown">
-                        <i class="bi bi-three-dots"></i>
-                      </a>
-                      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                        <li class="dropdown-header text-start">
-                          <h6>Filter</h6>
-                        </li>
-
-                        <li>
-                          <a class="dropdown-item" href="#">
-                            Today
-                          </a>
-                        </li>
-                        <li>
-                          <a class="dropdown-item" href="#">
-                            This Month
-                          </a>
-                        </li>
-                        <li>
-                          <a class="dropdown-item" href="#">
-                            This Year
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-
-                    <div class="card-body">
-                      <h5 class="card-title">
-                        Sales <span>| Today</span>
-                      </h5>
-
-                      <div class="d-flex align-items-center">
-                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                          <i class="bi bi-cart"></i>
-                        </div>
-                        <div class="ps-3">
-                          <h6>145</h6>
-                          <span class="text-success small pt-1 fw-bold">
-                            12%
-                          </span>{" "}
-                          <span class="text-muted small pt-2 ps-1">
-                            increase
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* <!-- End Sales Card --> */}
-
-                {/* <!-- Revenue Card --> */}
-                <div class="col-xxl-4 col-md-6">
-                  <div class="card info-card revenue-card">
-                    <div class="filter">
-                      <a class="icon" href="#" data-bs-toggle="dropdown">
-                        <i class="bi bi-three-dots"></i>
-                      </a>
-                      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                        <li class="dropdown-header text-start">
-                          <h6>Filter</h6>
-                        </li>
-
-                        <li>
-                          <a class="dropdown-item" href="#">
-                            Today
-                          </a>
-                        </li>
-                        <li>
-                          <a class="dropdown-item" href="#">
-                            This Month
-                          </a>
-                        </li>
-                        <li>
-                          <a class="dropdown-item" href="#">
-                            This Year
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-
-                    <div class="card-body">
-                      <h5 class="card-title">
-                        Revenue <span>| This Month</span>
-                      </h5>
-
-                      <div class="d-flex align-items-center">
-                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                          <i class="bi bi-currency-dollar"></i>
-                        </div>
-                        <div class="ps-3">
-                          <h6>$3,264</h6>
-                          <span class="text-success small pt-1 fw-bold">
-                            8%
-                          </span>{" "}
-                          <span class="text-muted small pt-2 ps-1">
-                            increase
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* <!-- End Revenue Card --> */}
-              </div>
-            </div>
-
-            {/* <!-- Right side columns --> */}
-          </div>
-        </section>
-      </main>
-    </>
+    </div>
   );
 };
-export default AdminDash;
+export default AdminNav;

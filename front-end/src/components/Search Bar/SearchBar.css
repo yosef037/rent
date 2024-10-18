@@ -1,5 +1,6 @@
 .search-bar {
   display: flex; /* Use flexbox for alignment */
+  padding-right: 20px;
 }
 
 .search-input-container {
@@ -7,8 +8,8 @@
 }
 
 .search-input {
-  width: 200px; /* Width of the input field */
-  padding: 10px 40px; /* Add padding and space for icon */
+  width: 250px; /* Width of the input field */
+  padding: 5px 20px; /* Add padding and space for icon */
   border-radius: 20px; /* Rounded corners */
   border: 1px solid #ccc; /* Light gray border */
   font-size: 16px; /* Font size */
@@ -20,6 +21,7 @@
   top: 50%; /* Center vertically */
   transform: translateY(-50%); /* Adjust vertical alignment */
   color: #999; /* Light gray color for icon */
+
 }
 
 .search-input::placeholder {

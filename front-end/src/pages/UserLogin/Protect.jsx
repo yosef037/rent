@@ -17,7 +17,7 @@ const ProtectedRoute = ({
 
   if (user.role !== requiredRole) {
     alert("You do not have permission to access this page."); // Optional: alert for unauthorized access
-    return <Navigate to="/" />; // Redirect if the user does not have the required role
+    return <Navigate to="/login" />; // Redirect if the user does not have the required role
   }
 
   return children; // Render the protected component if authorized

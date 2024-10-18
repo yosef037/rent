@@ -22,6 +22,13 @@ import Footer from "./components/Footer/Footer";
 import Contact from "./components/Contact/Contact";
 import Dashboard from "./components/admin/Dash";
 import AdminDash from "./components/admin/adminDash";
+import UserProfileSettings from "./components/Users/UserProfile";
+import LoginPage from "./pages/UserLogin/Login";
+import VehiclesAvailable from "./components/VehicleAvailable/VehiclesAvailable";
+import TaskPanels from "./components/admin/Dash";
+import ManageUsers from "./components/admin/Users/ManageUsers";
+import ManageLocations from "./components/admin/Locations/ManageLocations";
+import AdminAccountSettings from "./components/admin/AccountSettings/Account";
 
 const App = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -48,7 +55,15 @@ const App = () => {
 
           {/* Main Routes */}
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route
+              path="/"
+              element={
+                <Home
+                  setShowLogin={setModalIsOpen}
+                  onRequestClose={() => setModalIsOpen(false)}
+                />
+              }
+            />
             <Route
               path="/admin/add-vehicle"
               element={
@@ -85,6 +100,7 @@ const App = () => {
                 </ProtectedRoute>
               }
             /> */}
+            <Route path="/login" element={<LoginPage />} />
             <Route
               path="/admin"
               element={
@@ -134,6 +150,42 @@ const App = () => {
               }
             />
             <Route
+              path="/admin/manage-users"
+              element={
+                <ProtectedRoute
+                  requiredRole="admin"
+                  setShowLogin={setModalIsOpen}
+                  onRequestClose={() => setModalIsOpen(false)}
+                >
+                  <ManageUsers />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/manage-locations"
+              element={
+                <ProtectedRoute
+                  requiredRole="admin"
+                  setShowLogin={setModalIsOpen}
+                  onRequestClose={() => setModalIsOpen(false)}
+                >
+                  <ManageLocations />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/account-settings"
+              element={
+                <ProtectedRoute
+                  requiredRole="admin"
+                  setShowLogin={setModalIsOpen}
+                  onRequestClose={() => setModalIsOpen(false)}
+                >
+                  <AdminAccountSettings />
+                </ProtectedRoute>
+              }
+            />
+            <Route
               path="/booking/:id"
               element={
                 <ProtectedRoute
@@ -157,17 +209,18 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
-            {/* <Route
-              path="/cars"
+            <Route
+              path="/user-profile"
               element={
                 <ProtectedRoute
+                  requiredRole="user"
                   setShowLogin={setModalIsOpen}
                   onRequestClose={() => setModalIsOpen(false)}
                 >
-                  <Cars />
+                  <UserProfileSettings />
                 </ProtectedRoute>
               }
-            /> */}
+            />
 
             <Route
               path="/search-results"
@@ -214,7 +267,15 @@ const App = () => {
                 />
               }
             />
-
+            <Route
+              path="/vehicles/available"
+              element={
+                <VehiclesAvailable
+                  setShowLogin={setModalIsOpen}
+                  onRequestClose={() => setModalIsOpen(false)}
+                />
+              }
+            />
             {/* Add other routes as needed */}
           </Routes>
           <Footer setShowLogin={setModalIsOpen} />

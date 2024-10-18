@@ -20,13 +20,14 @@ const LoginPage = ({ setShowLogin, onRequestClose }) => {
     try {
       const res = await axios.post("http://localhost:5000/login", values); // Ensure the endpoint is correct
       if (res.data.Status === "Success") {
+        localStorage.setItem("userId", res.data.User_Id); // Store User ID
         localStorage.setItem("userId", res.data.userId);
         localStorage.setItem("email", res.data.Email);
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("role", res.data.role);
         // Define userData based on response
         const userData = {
-          userId: res.data.userId,
+          User_Id: res.data.User_Id, // Include User_Id here,
           Email: res.data.Email, // Ensure Email is included
           token: res.data.token,
           role: res.data.role,
@@ -60,7 +61,7 @@ const LoginPage = ({ setShowLogin, onRequestClose }) => {
       <form className="loginPopup-container" onSubmit={handleSubmit}>
         <div className="loginPopup-title">
           <h2>Login</h2>
-          <RxCross2 className="close-button" onClick={onRequestClose} />
+          <RxCross2 className="close-button" onClick={setShowLogin} />
 
           {/* <RxCross2 onClick={() => setShowLogin(false)} /> */}
         </div>
