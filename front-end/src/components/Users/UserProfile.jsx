@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios"; // Import Axios
 import { useAuth } from "../../pages/UserLogin/Authmodel"; // Assuming this provides user context
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // Importing icons for visibility toggle
 import "./UserProfile.css"; // Optional: Add your styles here
-
-const UserProfileSettings = () => {
+import axiosInstance from "../admin/Axios";
+const UserProfileSettings = ({ setShowLogin,onRequestClose }) => {
   const { user } = useAuth(); // Get user from Auth context
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -33,7 +32,7 @@ const UserProfileSettings = () => {
     }
 
     try {
-      const response = await axios.put(
+      const response = await axiosInstance.put(
         "http://localhost:5000/users/update-user",
         {
           First_name: firstName,

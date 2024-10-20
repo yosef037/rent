@@ -1,3 +1,5 @@
+
+
 .navbar img {
   width: 100px;
 }
@@ -65,38 +67,11 @@
   color: white;
 }
 
-/* .navbar li a:hover,
-.navbar li a.active {
-  color: #c40928;
+.profile h4{
+  font-weight: bold;
 }
 
-.navbar li a.active::after,
-.navbar li a:hover::after {
-  content: "";
-  width: 30%;
-  height: 2px;
-  background: #c40928;
-  position: absolute;
-  bottom: -4px;
-  left: 20px;
-}
+.profile span{
+  margin-left: 5px;
 
-.links {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 500;
-  gap: 10px;
-  transition: 0.5s ease;
-  cursor: pointer;
 }
-
-.links button:hover,
-.links button:active {
-  background: #c40928;
-  color: white;
-} */
-/* #mobile{
-  display: none;
-  align-items: center;
-} */

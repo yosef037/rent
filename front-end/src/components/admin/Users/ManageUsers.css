@@ -9,6 +9,11 @@
   border-collapse: collapse;
 }
 
+h1 {
+  text-decoration: underline;
+  margin: 20px;
+}
+
 .users-table th,
 .users-table td {
   border: 1px solid #ddd;

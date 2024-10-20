@@ -171,6 +171,36 @@ app.put(
     });
   }
 );
+// Confirm a booking
+app.put(
+  "/bookings/:id/cancel",
+  verifyToken,
+  authorizeRole("admin"),
+  (req, res) => {
+    const bookingId = req.params.id;
+
+    const query = `
+    UPDATE bookings
+    SET Status = 'canceled'
+    WHERE Booking_Id = ?
+  `;
+
+    db.query(query, [bookingId], (err, result) => {
+      if (err) {
+        console.error("Error updating booking status:", err);
+        return res
+          .status(500)
+          .json({ error: "Failed to update booking status" });
+      }
+
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ message: "Booking not found" });
+      }
+
+      res.json({ message: "Booking canceled successfully" });
+    });
+  }
+);
 
 // Reject a booking
 app.delete("/bookings/:id", verifyToken, authorizeRole("admin"), (req, res) => {
@@ -403,6 +433,7 @@ app.post("/vehicles/add", upload.array("images", 5), (req, res) => {
     }
   );
 });
+
 // Carlisting
 // Search Bar
 app.get("/vehicles", (req, res) => {
@@ -569,7 +600,8 @@ app.post("/login", (req, res) => {
           if (err) return res.json({ Error: "Password compare error" });
           if (response) {
             const email = data[0].Email;
-            const name = data[0].First_name; // Assuming First_name is stored in the users table
+            const FirstName = data[0].First_name; // Assuming First_name is stored in the users table
+            const lastName = data[0].Last_name; // Assuming Last_Name is stored in the users table
             const role = data[0].Role; // Assuming Role is stored in the users table
             const userId = data[0].User_Id; // Get User_Id from database
             const token = jwt.sign({ email, role }, "jwt-secret-key", {
@@ -583,6 +615,8 @@ app.post("/login", (req, res) => {
               token: token,
               Email: email,
               User_Id: userId, // Send User_Id in the response
+              First_name: FirstName,
+              Last_name: lastName,
             });
           } else {
             return res.json({ Error: "Password not matched" });
@@ -703,7 +737,7 @@ app.put("/admin/account", verifyToken, authorizeRole("admin"), (req, res) => {
 
   // If a password is provided, hash it
   const updates = [First_name, Last_name, Email, Phone];
-  
+
   // Check if password needs to be updated
   if (Password) {
     bcrypt.hash(Password, salt, (err, hash) => {
@@ -744,7 +778,6 @@ app.put("/admin/account", verifyToken, authorizeRole("admin"), (req, res) => {
   }
 });
 
-
 // Update user details
 app.put(
   "/users/update-user",
@@ -780,7 +813,7 @@ app.put(
       }
 
       if (result.affectedRows > 0) {
-        console.log(`User with ID ${User_Id} updated successfully.`);
+        // console.log(`User with ID ${User_Id} updated successfully.`);
         return res.json({
           Status: "Success",
           message: "User updated successfully",

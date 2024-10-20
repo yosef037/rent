@@ -30,7 +30,7 @@ const VehiclesAvailable = ({ setShowLogin }) => {
   }
 
   return (
-    <div className="vehicles-available">
+    <div className="vehicles-available ">
       {/* <h2>Available Vehicles</h2> */}
       <div className="vehicle-cards">
         {vehicles.map((vehicle) => (

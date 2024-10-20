@@ -5,6 +5,11 @@ import "./Navbar.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../pages/UserLogin/Authmodel";
 import SearchBar from "../Search Bar/SearchBar";
+import { IoMdSettings } from "react-icons/io";
+import { FaRegQuestionCircle } from "react-icons/fa";
+import { BsBoxArrowRight } from "react-icons/bs";
+import { IoCalendarNumberSharp } from "react-icons/io5";
+
 const Navbar = ({ setShowLogin }) => {
   const navigate = useNavigate();
   const location = useLocation(); // Get the current location
@@ -17,6 +22,11 @@ const Navbar = ({ setShowLogin }) => {
     return location.pathname === path ? "active" : "";
   };
 
+  // Function to get initials
+  const getInitials = (firstName) => {
+    const firstInitial = firstName.charAt(0).toUpperCase(); // Get first letter and capitalize
+    return `${firstInitial} `; // Return formatted initials
+  };
   return (
     <nav className="header gap-3">
       <div className="navbar">
@@ -54,6 +64,7 @@ const Navbar = ({ setShowLogin }) => {
 
       <div className="links">
         <SearchBar />
+
         {!user ? ( // If no user is logged in, show Sign Up button
           <button
             className="btn btn-outline-light btn-sm"
@@ -66,41 +77,78 @@ const Navbar = ({ setShowLogin }) => {
           </button>
         ) : (
           <div className="nav-item dropdown">
-            <a
-              className="nav-link nav-profile d-flex align-items-center pe-0"
-              href="#"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <VscAccount size={30} />
-              {/* <span className="ps-2">Settings</span> */}
-            </a>
+            <div className="nav-item dropdown pe-3 d-flex">
+              <Link
+                className="nav-link nav-profile d-flex align-items-center pe-0"
+                to={"./admin/account-settings"}
+                data-bs-toggle="dropdown"
+                aria-expanded="false" // Accessibility attribute
+              >
+                <VscAccount size={30} />
+                <span className="d-none d-md-block dropdown-toggle ps-2">
+                  {getInitials(user.First_name)}. {user.Last_name}
+                </span>
+              </Link>
+              {/* End Profile Image Icon */}
 
-            <ul className="dropdown-menu dropdown-menu-end">
-              <li>
-                <Link className="dropdown-item" to="/user-profile">
-                  My Profile
-                </Link>
-              </li>
-              <li>
-                <Link className="dropdown-item" to="/view-bookings">
-                  My Bookings
-                </Link>
-              </li>
-              <li>
-                <Link className="dropdown-item" to="/help">
-                  Need Help?
-                </Link>
-              </li>
-              <li>
-                <hr className="dropdown-divider" />
-              </li>
-              <li>
-                <a className="dropdown-item" href="#" onClick={handleLogout}>
-                  Sign Out
-                </a>
-              </li>
-            </ul>
+              <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                <li className="dropdown-header">
+                  <h4>
+                    {user.First_name} {user.Last_name}
+                  </h4>
+                </li>
+                <li>
+                  <hr className="dropdown-divider" />
+                </li>
+                <li>
+                  <Link
+                    className="dropdown-item d-flex align-items-center"
+                    to="/user-profile"
+                  >
+                    <IoMdSettings />
+                    <span>My Profile</span>
+                  </Link>
+                </li>
+                <li>
+                  <hr className="dropdown-divider" />
+                </li>
+                <li>
+                  <Link
+                    className="dropdown-item -flex align-items-center"
+                    to="/view-bookings"
+                  >
+                    <IoCalendarNumberSharp />
+
+                    <span>My Bookings</span>
+                  </Link>
+                </li>
+                <li>
+                  <hr className="dropdown-divider" />
+                </li>
+                <li>
+                  <Link
+                    className="dropdown-item d-flex align-items-center"
+                    to={"/help"} // Change this to your help page route
+                  >
+                    <FaRegQuestionCircle />
+                    <span>Need Help?</span>
+                  </Link>
+                </li>
+                <li>
+                  <hr className="dropdown-divider" />
+                </li>
+                <li>
+                  <Link
+                    className="dropdown-item d-flex align-items-center"
+                    onClick={handleLogout} // Replace with your logout function
+                  >
+                    <BsBoxArrowRight />
+                    <span>Sign Out</span>
+                  </Link>
+                </li>
+              </ul>
+              {/* End Profile Dropdown Items */}
+            </div>
           </div>
         )}
 

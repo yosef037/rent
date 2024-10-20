@@ -2,6 +2,12 @@
   max-width: 1200px;
 }
 
+.container h1 {
+  margin: 20px;
+  text-align: center;
+  text-decoration: none;
+}
+
 .card {
   transition: transform 0.2s; /* Animation */
 }

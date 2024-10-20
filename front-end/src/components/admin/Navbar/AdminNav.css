@@ -1,0 +1,24 @@
+.admin-dashboard {
+  display: flex;
+}
+
+.content {
+  flex-grow: 1; /* Allow content to take remaining space */
+}
+
+.sidebar-open .manage-users {
+  margin-left: 250px; /* Adjust based on sidebar width */
+}
+
+.sidebar-closed .manage-users {
+  margin-left: 0; /* No margin when sidebar is closed */
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 700;
+  color: white;
+  font-family: "Nunito", sans-serif;
+  list-style: none;
+  cursor: pointer;
+}

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import axios from "../../api/axios";
+// import axios from "../../api/axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../UserLogin/Authmodel"; // Import user context
 import "./VehicleDetail.css"; // Import your CSS file
 import { Link } from "react-router-dom";
+import axiosInstance from "../../components/admin/Axios";
 
 const VehicleDetail = ({ setShowLogin }) => {
   const { id } = useParams(); // Get vehicle ID from URL parameters
@@ -21,7 +22,7 @@ const VehicleDetail = ({ setShowLogin }) => {
   useEffect(() => {
     const fetchVehicleDetails = async () => {
       try {
-        const response = await axios.get(
+        const response = await axiosInstance.get(
           `http://localhost:5000/vehicles/${id}`
         );
         setVehicle(response.data);
@@ -44,7 +45,7 @@ const VehicleDetail = ({ setShowLogin }) => {
   const handleBookingSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/bookings", {
+      await axiosInstance.post("http://localhost:5000/bookings", {
         Vehicle_Id: id,
         ...bookingData,
       });
@@ -82,83 +83,90 @@ const VehicleDetail = ({ setShowLogin }) => {
       </div>
 
       {/* Additional vehicle details */}
-      <h3>Description</h3>
-      <p>{vehicle.Vehicle_Description}</p>
-      <h3>Details</h3>
-      <ul>
-        <li>
-          <strong>Year:</strong> {vehicle.Year}
-        </li>
-        <li>
-          <strong>Color:</strong> {vehicle.Color}
-        </li>
-        <li>
-          <strong>Fuel Type:</strong> {vehicle.Fuel_Type}
-        </li>
-        <li>
-          <strong>Seating Capacity:</strong> {vehicle.Seating_Capacity}
-        </li>
-        <li>
-          <strong>Status:</strong> {vehicle.Status}
-        </li>
-        <li>
-          <strong>Price per Day:</strong> ${vehicle.Price_Per_Day}
-        </li>
-      </ul>
-
-      {/* Booking Form */}
-      <h3>Book This Vehicle</h3>
-      <form onSubmit={handleBookingSubmit} className="booking-form">
-        <div className="form-group">
-          <label>Start Date</label>
-          <input
-            type="date"
-            name="Start_Date"
-            className="form-control"
-            value={bookingData.Start_Date}
-            onChange={handleInputChange}
-            required
-          />
+      <div className="d-flex m-5 gap-5">
+        <div className="details w-25">
+          <h3>Description</h3>
+          <p>{vehicle.Vehicle_Description}</p>
+          <h3>Details</h3>
+          <ul>
+            <li>
+              <strong>Year:</strong> {vehicle.Year}
+            </li>
+            <li>
+              <strong>Color:</strong> {vehicle.Color}
+            </li>
+            <li>
+              <strong>Fuel Type:</strong> {vehicle.Fuel_Type}
+            </li>
+            <li>
+              <strong>Seating Capacity:</strong> {vehicle.Seating_Capacity}
+            </li>
+            <li>
+              <strong>Status:</strong> {vehicle.Status}
+            </li>
+            <li>
+              <strong>Price per Day:</strong> ${vehicle.Price_Per_Day}
+            </li>
+          </ul>
         </div>
-        <div className="form-group">
-          <label>End Date</label>
-          <input
-            type="date"
-            name="End_Date"
-            className="form-control"
-            value={bookingData.End_Date}
-            onChange={handleInputChange}
-            required
-          />
+        <div className="booking w-25 ">
+          {/* Booking Form */}
+          <h3>Book This Vehicle</h3>
+          <form onSubmit={handleBookingSubmit} className="booking-form  ">
+            <div className="form-group">
+              <label>Start Date</label>
+              <input
+                type="date"
+                name="Start_Date"
+                className="form-control"
+                value={bookingData.Start_Date}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>End Date</label>
+              <input
+                type="date"
+                name="End_Date"
+                className="form-control"
+                value={bookingData.End_Date}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Message</label>
+              <textarea
+                name="Message"
+                className="form-control"
+                value={bookingData.Message}
+                onChange={handleInputChange}
+              />
+            </div>
+            {user ? (
+              <Link
+                to={`/vehicles/${vehicle.Vehicle_Id}`}
+                state={{ userEmail: user.Email }} // Pass user email via state
+              >
+                <button className="btn-details" onClick={handleBookingSubmit}>
+                  Book This Vehicle
+                </button>
+              </Link>
+            ) : (
+              <button
+                className="btn-details"
+                onClick={() => {
+                  alert("Please log in to book.");
+                  setShowLogin(true);
+                }}
+              >
+                Login to Book
+              </button>
+            )}
+          </form>
         </div>
-        <div className="form-group">
-          <label>Message</label>
-          <textarea
-            name="Message"
-            className="form-control"
-            value={bookingData.Message}
-            onChange={handleInputChange}
-          />
-        </div>
-        {user ? (
-          <Link
-            to={`/vehicles/${vehicle.Vehicle_Id}`}
-            state={{ userEmail: user.Email }} // Pass user email via state
-          >
-            <button className="btn-details">Book This Vehicle</button>
-          </Link>
-        ) : (
-          <button
-            className="btn-details"
-            onClick={() => {
-              alert("Please log in to book.");
-              setShowLogin(true);
-            }}
-          >
-            Login to Book
-          </button>
-        )}
-      </form>
+      </div>
     </div>
   );
 };

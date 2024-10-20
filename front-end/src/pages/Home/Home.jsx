@@ -1,6 +1,7 @@
 import React from "react";
 import "./Home.css"; // Import CSS for styling
 import VehiclesAvailable from "../../components/VehicleAvailable/VehiclesAvailable";
+import { Link } from "react-router-dom";
 
 const Home = ({ setShowLogin, onRequestClose }) => {
   return (
@@ -8,9 +9,11 @@ const Home = ({ setShowLogin, onRequestClose }) => {
       <header className="hero-section">
         <h1>Welcome to Our Vehicle Rental Service</h1>
         <p>Your one-stop solution for renting vehicles in Zambia.</p>
-        <VehiclesAvailable setShowLogin={setShowLogin} />
-        <button className="btn-explore">Explore Now</button>
+        <Link to={"/carList"}>
+          <button className="btn-explore">Explore Now</button>
+        </Link>
       </header>
+      <VehiclesAvailable setShowLogin={setShowLogin} />
 
       <section className="features">
         <h2>Why Choose Us?</h2>

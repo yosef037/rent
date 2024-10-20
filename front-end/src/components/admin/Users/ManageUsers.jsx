@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../Axios";
 import "./ManageUsers.css"; // Import CSS for styling
-import AdminNav from "../AdminNav";
+import AdminNav from "../Navbar/AdminNav";
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
@@ -81,7 +81,7 @@ const ManageUsers = () => {
     <>
       <AdminNav />
       <div className="manage-users">
-        <h3>Manage Users</h3>
+        <h1>Manage Users</h1>
 
         {editingUser ? (
           <form onSubmit={handleUpdateUser} className="edit-user-form">

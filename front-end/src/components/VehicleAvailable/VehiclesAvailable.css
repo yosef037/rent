@@ -1,10 +1,12 @@
 .vehicles-available {
   padding: 40px 20px; /* Padding for top and bottom */
+  background-image: linear-gradient(to right, #000c14, #f8002f);
 }
 
 .vehicles-available h2 {
   text-align: center; /* Center heading */
   margin-bottom: 30px; /* Space below heading */
+  background: black;
 }
 
 .vehicle-cards {

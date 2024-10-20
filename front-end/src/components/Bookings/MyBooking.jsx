@@ -38,6 +38,10 @@ const ViewBookings = ({ setShowLogin }) => {
     return <p className="text-danger">{errorMessage}</p>;
   }
 
+  const rejectedBookings = bookings.filter(
+    (booking) => booking.Status === "canceled"
+  );
+
   return (
     <div className="container mt-4">
       <h2>My Bookings</h2>
@@ -76,50 +80,6 @@ const ViewBookings = ({ setShowLogin }) => {
                       }}
                     />
                   )}
-                  {/* {booking.Image_2 && (
-                    <img
-                      src={`http://localhost:5000${booking.Image_2}`}
-                      alt="Vehicle"
-                      style={{
-                        width: "100px",
-                        height: "auto",
-                        marginRight: "5px",
-                      }}
-                    />
-                  )}
-                  {booking.Image_3 && (
-                    <img
-                      src={`http://localhost:5000${booking.Image_3}`}
-                      alt="Vehicle"
-                      style={{
-                        width: "100px",
-                        height: "auto",
-                        marginRight: "5px",
-                      }}
-                    />
-                  )}
-                  {booking.Image_4 && (
-                    <img
-                      src={`http://localhost:5000${booking.Image_4}`}
-                      alt="Vehicle"
-                      style={{
-                        width: "100px",
-                        height: "auto",
-                        marginRight: "5px",
-                      }}
-                    />
-                  )}
-                  {booking.Image_5 && (
-                    <img
-                      src={`http://localhost:5000${booking.Image_5}`}
-                      alt="Vehicle"
-                      style={{
-                        width: "100px",
-                        height: "auto",
-                        marginRight: "5px",
-                      }}
-                    />
-                  )} */}
                 </td>{" "}
                 {/* Display Images */}
                 <td>{new Date(booking.Start_Date).toLocaleDateString()}</td>
@@ -131,6 +91,55 @@ const ViewBookings = ({ setShowLogin }) => {
           </tbody>
         </table>
       )}
+
+      {/* Rejected Bookings Section */}
+      <section className="mt-4">
+        <h2>Rejected Bookings</h2>
+        {rejectedBookings.length === 0 ? (
+          <p>No rejected bookings found.</p>
+        ) : (
+          <table className="booking-table">
+            <thead>
+              <tr>
+                <th>Booking Number</th>
+                <th>Vehicle ID</th>
+                <th>Email</th>
+                <th>Images</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Message</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rejectedBookings.map((booking) => (
+                <tr key={booking.Booking_Id}>
+                  <td>{booking.Booking_Number}</td>
+                  <td>{booking.Vehicle_Id}</td>
+                  <td>{booking.Email}</td>
+                  <td>
+                    {booking.Image_1 && (
+                      <img
+                        src={`http://localhost:5000${booking.Image_1}`}
+                        alt="Vehicle"
+                        style={{
+                          width: "100px",
+                          height: "auto",
+                          marginRight: "5px",
+                        }}
+                      />
+                    )}
+                  </td>
+                  <td>{new Date(booking.Start_Date).toLocaleDateString()}</td>
+                  <td>{new Date(booking.End_Date).toLocaleDateString()}</td>
+                  <td>{booking.Message}</td>
+                  <td>{booking.Status}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </section>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../Axios"; // Import your configured axios instance
 import "./ManageLocations.css"; // Import CSS for styling
-import AdminNav from "../AdminNav";
+import AdminNav from "../Navbar/AdminNav";
 
 const ManageLocations = () => {
   const [locations, setLocations] = useState([]);
@@ -69,7 +69,7 @@ const ManageLocations = () => {
   return (
     <>
       <AdminNav />
-      <div className="manage-locations">
+      <div className="manage-locations s">
         <h3>Manage Locations</h3>
 
         {editingLocation ? (

@@ -3,7 +3,7 @@ import axiosInstance from "../Axios"; // Import your configured axios instance
 import "./Account.css"; // Import CSS for styling
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // For password visibility toggle
 import { useAuth } from "../../../pages/UserLogin/Authmodel";
-import AdminNav from "../AdminNav";
+import AdminNav from "../Navbar/AdminNav";
 
 const AdminAccountSettings = () => {
   const { user } = useAuth(); // Get user from Auth context

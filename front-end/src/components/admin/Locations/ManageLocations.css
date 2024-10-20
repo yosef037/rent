@@ -1,5 +1,7 @@
 .manage-locations {
   padding: 20px;
+  margin-left: 290px; /* Adjust based on sidebar width */
+  transition: margin-left 0.3s; /* Smooth transition for margin changes */
 }
 
 .locations-table {

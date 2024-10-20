@@ -22,7 +22,7 @@ const SearchBar = () => {
   };
 
   return (
-    <form onSubmit={handleSearch} className="search-bar">
+    <form onSubmit={handleSearch} className="search">
       <div className="search-input-container">
         <FaSearch className="search-icon" />
         <input

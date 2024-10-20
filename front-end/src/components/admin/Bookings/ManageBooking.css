@@ -1,0 +1,24 @@
+.manage-booking {
+  padding: 20px;
+  margin-left: 290px; /* Adjust based on sidebar width */
+  transition: margin-left 0.3s; /* Smooth transition for margin changes */
+}
+
+.manage-booking th {
+  background-color: #007bff;
+  color: white;
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-collapse: collapse;
+}
+
+.manage-booking th,
+.manage-booking td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  width: 5%;
+}
+
+.manage-booking button {
+  margin: 2px;
+}

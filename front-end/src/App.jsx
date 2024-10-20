@@ -4,31 +4,26 @@ import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
 import AuthModal from "./pages/UserLogin/Model";
 import Modal from "react-modal"; // Import Modal
-import AddVehicle from "./components/AddCar";
 import { AuthProvider } from "./pages/UserLogin/Authmodel";
 import ProtectedRoute from "./pages/UserLogin/Protect";
 import BookingForm from "./components/Bookings/BookingForm";
 import ViewBookings from "./components/Bookings/MyBooking";
-import AdminBookings from "./components/admin/Admin";
-import ManageBooking from "./components/admin/ManageBooking";
-import AdminDashboard from "./components/admin/AdminDashboard";
-import ManageVehicle from "./components/admin/ManageVehicles";
+import ManageBooking from "./components/admin/Bookings/ManageBooking";
+import ManageVehicle from "./components/admin/Vehicles/ManageVehicles";
 import VehicleDetail from "./pages/CarListing/VehicleDetail";
 import CarListing from "./pages/CarListing/CarList";
-import "bootstrap/dist/css/bootstrap.min.css";
 import SearchResults from "./components/Search Bar/SearchResults";
 import Locations from "./components/Locations/Locations";
 import Footer from "./components/Footer/Footer";
 import Contact from "./components/Contact/Contact";
-import Dashboard from "./components/admin/Dash";
-import AdminDash from "./components/admin/adminDash";
+import AdminDash from "./components/admin/DashBoard/AdminDash";
 import UserProfileSettings from "./components/Users/UserProfile";
-import LoginPage from "./pages/UserLogin/Login";
 import VehiclesAvailable from "./components/VehicleAvailable/VehiclesAvailable";
-import TaskPanels from "./components/admin/Dash";
 import ManageUsers from "./components/admin/Users/ManageUsers";
 import ManageLocations from "./components/admin/Locations/ManageLocations";
 import AdminAccountSettings from "./components/admin/AccountSettings/Account";
+import LoginPage from "./pages/UserLogin/Login";
+import HelpPage from "./components/HelpPage/HelpPage";
 
 const App = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -65,43 +60,6 @@ const App = () => {
               }
             />
             <Route
-              path="/admin/add-vehicle"
-              element={
-                <ProtectedRoute
-                  requiredRole="admin"
-                  setShowLogin={setModalIsOpen}
-                  onRequestClose={() => setModalIsOpen(false)}
-                >
-                  <AddVehicle />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/admin/approve"
-              element={
-                <ProtectedRoute
-                  requiredRole="admin"
-                  setShowLogin={setModalIsOpen}
-                  onRequestClose={() => setModalIsOpen(false)}
-                >
-                  <AdminBookings />
-                </ProtectedRoute>
-              }
-            />
-            {/* <Route
-              path="/admin"
-              element={
-                <ProtectedRoute
-                  requiredRole="admin"
-                  setShowLogin={setModalIsOpen}
-                  onRequestClose={() => setModalIsOpen(false)}
-                >
-                  <AdminDashboard />
-                </ProtectedRoute>
-              }
-            /> */}
-            <Route path="/login" element={<LoginPage />} />
-            <Route
               path="/admin"
               element={
                 <ProtectedRoute
@@ -137,18 +95,7 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
-            <Route
-              path="/admin/dash"
-              element={
-                <ProtectedRoute
-                  requiredRole="admin"
-                  setShowLogin={setModalIsOpen}
-                  onRequestClose={() => setModalIsOpen(false)}
-                >
-                  <Dashboard />
-                </ProtectedRoute>
-              }
-            />
+
             <Route
               path="/admin/manage-users"
               element={
@@ -258,6 +205,16 @@ const App = () => {
                 />
               }
             />
+            <Route
+              path="/help"
+              element={
+                <HelpPage
+                  setShowLogin={setModalIsOpen}
+                  onRequestClose={() => setModalIsOpen(false)}
+                />
+              }
+            />
+            <Route path="/login" element={<LoginPage />} />
             <Route
               path="/vehicles/:id"
               element={

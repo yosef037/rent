@@ -70,10 +70,15 @@
   text-align: center;
 }
 
-.social-icons {
+.footer-socials .social-icons {
   display: flex;
   justify-content: center;
   gap: 15px; /* Space between icons */
+  color: #c40928;
+}
+
+.footer-socials .social-icons:hover {
+  color: #0056b3;
 }
 
 .footer-socials h4 {

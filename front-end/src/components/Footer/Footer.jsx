@@ -39,15 +39,25 @@ const Footer = () => {
       <div className="footer-socials">
         <h4>Follow Us</h4>
         <div className="social-icons">
-          <a href="#" target="_blank" rel="noopener noreferrer">
-            <FaFacebook size={24} />
-          </a>
-          <a href="#" target="_blank" rel="noopener noreferrer">
+          <Link to={""} target="_blank" rel="noopener noreferrer">
+            <FaFacebook className="social-icons" size={24} />
+          </Link>
+          <Link
+            href="#"
+            className="social-icons"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FaTwitter size={24} />
-          </a>
-          <a href="#" target="_blank" rel="noopener noreferrer">
+          </Link>
+          <Link
+            href="#"
+            className="social-icons"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FaInstagram size={24} />
-          </a>
+          </Link>
         </div>
       </div>
       <div className="footer-bottom">

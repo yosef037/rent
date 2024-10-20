@@ -25,16 +25,25 @@ const LoginPage = ({ setShowLogin, onRequestClose }) => {
         localStorage.setItem("email", res.data.Email);
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("role", res.data.role);
+        localStorage.setItem("userName", res.data.role);
+        localStorage.setItem("firstName", res.data.First_name);
+        localStorage.setItem("lastName", res.data.Last_name);
+
+        // console.log(`First Name ${res.data.First_name}`);
+
         // Define userData based on response
         const userData = {
           User_Id: res.data.User_Id, // Include User_Id here,
           Email: res.data.Email, // Ensure Email is included
           token: res.data.token,
           role: res.data.role,
+          First_name: res.data.First_name,
+          Last_name: res.data.Last_name,
         };
         login(userData); // Call the login function from context
 
-        console.log(`User Token: ${res.data.token}`); //To determine if the user is being received
+        // console.log(`User Token: ${res.data.token}`); //To determine if the user is being received
+        // console.log(`Last Name ${res.data.Last_name}`);
         if (res.data.role === "admin") {
           navigate("/admin");
 
